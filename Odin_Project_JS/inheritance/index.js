@@ -12,6 +12,8 @@ const book1 = new Book('Harry Potter,', 'JK Rowling,',"255 pages,", false);
 
 book1.info();*/
 
+// Inheritance with objects Person and Player
+/*
 Object.setPrototypeOf(Player.prototype, Person.prototype);
 
 
@@ -46,6 +48,7 @@ player2.sayName(); // Hello, I'm tom!
 player1.getMarker(); // My marker is X!
 player2.getMarker(); // My marker is O!
 
+//cats
 const cat= {
     makeSound: function(){
         console.log(this.sound)
@@ -61,3 +64,45 @@ cat1.makeSound();
 const cat2 = Object.create(cat);
 cat2.sound = "Meow!";
 cat2.makeSound();
+
+*/
+// rpg chars 
+// Initialize constructor functions
+/*
+function Hero(name, level) {
+    this.name = name;
+    this.level = level;
+}
+
+function Warrior(name, level, weapon) {
+    Hero.call(this, name, level); 
+    this.weapon = weapon;
+}
+
+function Healer(name, level, spell) {
+    Hero.call(this, name, level);
+
+    this.spell = spell;
+}
+
+  // Link prototypes and add prototype methods
+Object.setPrototypeOf(Warrior.prototype, Hero.prototype);
+Object.setPrototypeOf(Healer.prototype, Hero.prototype);
+
+Hero.prototype.greet = function () {
+    return `${this.name} says hello.`;
+}
+
+Warrior.prototype.attack = function () {
+    return `${this.name} attacks with the ${this.weapon}.`;
+}
+
+Healer.prototype.heal = function () {
+    return `${this.name} casts ${this.spell}.`;
+}
+
+  // Initialize individual character instances
+const hero1 = new Warrior('Bjorn', 1, 'axe');
+const hero2 = new Healer('Kanin', 1, 'cure');
+
+*/
