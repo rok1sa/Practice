@@ -106,3 +106,18 @@ const hero1 = new Warrior('Bjorn', 1, 'axe');
 const hero2 = new Healer('Kanin', 1, 'cure');
 
 */
+/*
+const cat = {
+    init: function(sound){
+        this.sound = sound
+        return this
+    },
+    makeSound: function(){
+        console.log(this.sound);
+    }
+}
+
+const cat1 = 
+    Object.create(cat).init('meowr');
+cat1.makeSound();
+*/
