@@ -121,3 +121,4 @@ const cat1 =
     Object.create(cat).init('meowr');
 cat1.makeSound();
 */
+console.log('hello world');
