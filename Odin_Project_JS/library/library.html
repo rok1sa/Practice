@@ -13,7 +13,9 @@
     <div class="workingArea">
         <h1>Books</h1>
         <div class="book1"></div>
-        <p>This is digital library</p>
+        <p>
+            <span class="highlight">This is digital library</span>
+        </p>
     </div>
 
     <script src="library.js"></script>
@@ -47,12 +49,13 @@ h1{
 
 p{
     color: rgb(255, 230, 230);
-    letter-spacing: 2px;
-    padding: 0 5px;
-    margin: 0;
-    box-sizing: border-box;
-    background-image: linear-gradient(to bottom, rgb(103, 103, 47), rgb(80, 80, 37));
+}
 
+.highlight{
+    display: inline;
+    padding: 1px 0;
+    background: hsl(60, 100%, 59%);
+    color: #ffcaca;
 }
 
 
