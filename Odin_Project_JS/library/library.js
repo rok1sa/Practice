@@ -11,7 +11,11 @@ function Book(title, author, pages, isRead){
 function addBookToLibrary(){
 }
 
-function displayBooks(theLibrary){
+const book1 = Object.create(Book);
+
+/*function displayBooks(theLibrary){
     theLibrary.forEach(x => console.log(x));
     call.Book();
-}
+}*/
+
+document.getElementById('.booksDiv').innerHTML 
