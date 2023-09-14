@@ -8,14 +8,12 @@ function Book(title, author, pages, isRead){
 
 }
 
-function addBookToLibrary(){
+function addBookToLibrary(){ 
 }
 
-const book1 = Object.create(Book);
+const book1 = new Book('Title', "Author", 255, false);
 
-/*function displayBooks(theLibrary){
-    theLibrary.forEach(x => console.log(x));
-    call.Book();
-}*/
+theLibrary.push(book1);
+console.log(theLibrary);
 
-document.getElementById('.booksDiv').innerHTML 
+document.write(theLibrary);
