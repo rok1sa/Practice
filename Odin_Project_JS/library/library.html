@@ -17,13 +17,35 @@
             <span class="highlight">This is digital library</span>
         </p>
     </div>
+
     <div class="booksDiv"></div>
+
+    <button id="btnAddBook">Add new book</button>
+
+    <form id="formInput">
+        <label for="title">Book title:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="author">Book author:</label><br>
+        <input type="text" id="author" name="author"><br>
+        <label for="pages">Number of pages:</label><br>
+        <input type="number" id="pages" name="pages"><br>
+        <label for="isRead">Is book read?</label>
+            <select name="isRead" id="isRead" type="text">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+    </form>
+
+    <div id="msgBoxDisplay"></div>
 
     <script src="library.js"></script>
 
 
 <style>
 
+#formInput{
+    color:blanchedalmond;
+}
 
 @font-face {
     font-family: 'Source Sans Pro';
