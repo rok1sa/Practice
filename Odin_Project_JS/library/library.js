@@ -1,34 +1,76 @@
-const theLibrary = [
-    var form = document.querySelector("form");
-    form.onsubmit = function (){
-        
-        title = document.getElementById("author").value
-        author = document.getElementById("author").value
-        pages = document.getElementById("pages").value
-        isRead = document.getElementById("isRead").value
-
-        newBook = new Book(title, author, pages, isRead)
-        theLibrary.push(newBook)
+const BookClass = class{
+    constructor(author, title, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
     }
+}
+/*
+var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
+
+    var newBook = new BookClass();
+    newBook.title = document.getElementById("title").value;    
+    newBook.author = document.getElementById("author").value;
+    newBook.pages = document.getElementById('pages').value;
+    newBook.isRead = document.getElementById('isRead').value;
+
+    const prevent = function(){
+        var form = document.querySelector("form").addEventListener("click", function(event){
+    
+            event.preventDefault();
+        })
+    }
+    
+    prevent();
+
+})
+*/
+
+const theLibrary = [
+    function submitForm(){
+        
+        var form = document.querySelector("form").addEventListener("click", function(){
+            title = document.getElementById("author").value
+            author = document.getElementById("author").value
+            pages = document.getElementById("pages").value
+            isRead = document.getElementById("isRead").value
+
+            newBook = new BookClass(title, author, pages, isRead)
+            theLibrary.push(newBook)
+
+    var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
+
+        var newBook = new BookClass();
+        newBook.title = document.getElementById("title").value;    
+        newBook.author = document.getElementById("author").value;
+        newBook.pages = document.getElementById('pages').value;
+        newBook.isRead = document.getElementById('isRead').value;
+            
+        const prevent = function(){
+            var form = document.querySelector("form").addEventListener("click", function(event){
+                
+                event.preventDefault();
+        })
+    }
+                
+        prevent();
+            
+        })
+    })
+}
 ];
 
+/*
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const isReadInput = document.getElementById("isRead");
-
+//
 const messageBox = document.getElementById('msgBoxDisplay');
-
 const libraryInput = document.getElementById('libraryInput');
-
-function Book(title, author, pages, isRead){
-    this.title = title;
-    this. author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-
-}
-
+*/
+/*
 function insert(){
     theLibrary.push(titleInput.value);
     theLibrary.push(authorInput.value);
@@ -61,6 +103,7 @@ function addBookToLibrary(){
 addBookToLibrary();
 
 insert();
+*/
 
 //const book1 = new Book('Crime and Punishment', "Dostoevsky", 255, false);
 
