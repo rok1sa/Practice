@@ -1,4 +1,16 @@
-const theLibrary = [];
+const theLibrary = [
+    var form = document.querySelector("form");
+    form.onsubmit = function (){
+        
+        title = document.getElementById("author").value
+        author = document.getElementById("author").value
+        pages = document.getElementById("pages").value
+        isRead = document.getElementById("isRead").value
+
+        newBook = new Book(title, author, pages, isRead)
+        theLibrary.push(newBook)
+    }
+];
 
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
@@ -38,8 +50,15 @@ function clearAndShow(){
 }
 
 function addBookToLibrary(){
-    //
+    titleInput = Book.title;
+    authorInput = Book.author;
+    pagesInput = Book.pages;
+    isReadInput = Book.isRead;
+
+    display(Book.title);
 }
+
+addBookToLibrary();
 
 insert();
 
