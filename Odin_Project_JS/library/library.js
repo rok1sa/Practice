@@ -1,4 +1,4 @@
-const BookClass = class{
+const Book= class{
     constructor(author, title, pages, isRead){
         this.title = title;
         this.author = author;
@@ -9,7 +9,7 @@ const BookClass = class{
 
 var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
 
-    var newBook = new BookClass();
+    var newBook = new Book();
     newBook.title = document.getElementById("title").value;    
     newBook.author = document.getElementById("author").value;
     newBook.pages = document.getElementById('pages').value;
