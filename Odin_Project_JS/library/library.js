@@ -6,7 +6,7 @@ const BookClass = class{
         this.isRead = isRead;
     }
 }
-/*
+
 var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
 
     var newBook = new BookClass();
@@ -24,41 +24,14 @@ var dataSubmittingForm = document.getElementById("send").addEventListener("click
     
     prevent();
 
+    console.log(newBook);
+    theLibrary.push(newBook);
+    console.log(theLibrary);
+
 })
-*/
 
 const theLibrary = [
-    function submitForm(){
-        
-        var form = document.querySelector("form").addEventListener("click", function(){
-            title = document.getElementById("author").value
-            author = document.getElementById("author").value
-            pages = document.getElementById("pages").value
-            isRead = document.getElementById("isRead").value
-
-            newBook = new BookClass(title, author, pages, isRead)
-            theLibrary.push(newBook)
-
-    var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
-
-        var newBook = new BookClass();
-        newBook.title = document.getElementById("title").value;    
-        newBook.author = document.getElementById("author").value;
-        newBook.pages = document.getElementById('pages').value;
-        newBook.isRead = document.getElementById('isRead').value;
-            
-        const prevent = function(){
-            var form = document.querySelector("form").addEventListener("click", function(event){
-                
-                event.preventDefault();
-        })
-    }
-                
-        prevent();
-            
-        })
-    })
-}
+    
 ];
 
 /*
