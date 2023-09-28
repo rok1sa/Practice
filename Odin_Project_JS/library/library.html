@@ -22,19 +22,27 @@
 
     <button id="btnAddBook">Add new book</button>
 
-    <form id="formInput">
-        <label for="title">Book title:</label><br>
-        <input type="text" id="title" name="title"><br>
-        <label for="author">Book author:</label><br>
-        <input type="text" id="author" name="author"><br>
-        <label for="pages">Number of pages:</label><br>
-        <input type="number" id="pages" name="pages"><br>
-        <label for="isRead">Is book read?</label>
+    <form id="formGeneral">
+    <form id="formTile">
+        <label for="title" id="coloringFormText">Book title:</label><br>
+        <input type="text" id="title" name="title"> <input type="reset" id="resetTitle"><br>
+    </form>
+    <form id="formAuthor">
+        <label for="author" id="coloringFormText">Book author:</label><br>
+        <input type="text" id="author" name="author"> <input type="reset" id="resetTitle"><br>
+    </form>
+    <form id="formPages">
+        <label for="pages" id="coloringFormText">Number of pages:</label><br>
+        <input type="number" id="pages" name="pages"> <input type="reset" id="resetTitle"><br>
+    </form>
+        <label for="isRead" id="coloringFormText">Is book read?</label>
             <select name="isRead" id="isRead" type="text">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select><br>
-        <input type="submit" id="send"> 
+        <input type="submit" id="send"><br>
+        <!--input type="reset" id="reset"-->
+    </form><br>
     </form>
 
     <div id="msgBoxDisplay"></div>
@@ -80,6 +88,10 @@ p{
     padding: 1px 0;
     background: hsla(62, 100%, 54%, 0.89);
     color: rgb(38, 38, 38);
+}
+
+#coloringFormText{
+    color: rgb(224, 224, 224);
 }
 
 </style>
