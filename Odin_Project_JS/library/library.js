@@ -1,3 +1,9 @@
+title = document.getElementById("title").value;    
+author = document.getElementById("author").value;
+pages = document.getElementById('pages').value;
+isRead = document.getElementById('isRead').value;
+
+
 const Book= class{
     constructor(author, title, pages, isRead){
         this.title = title;
@@ -34,64 +40,12 @@ const theLibrary = [
     
 ];
 
-/*
-const titleInput = document.getElementById("title");
-const authorInput = document.getElementById("author");
-const pagesInput = document.getElementById("pages");
-const isReadInput = document.getElementById("isRead");
-//
-const messageBox = document.getElementById('msgBoxDisplay');
-const libraryInput = document.getElementById('libraryInput');
-*/
-/*
-function insert(){
-    theLibrary.push(titleInput.value);
-    theLibrary.push(authorInput.value);
-    theLibrary.push(pagesInput.value);
-    theLibrary.push(isReadInput.value);
+function clearAll(){
+    const checkIfClicked = getElementById("clearAll").addEventListener("click", function(e){
 
-    clearAndShow();
+        title = "";
+        author = "";
+        pages = "";
+    })
 }
 
-function clearAndShow(){
-    titleInput.value = "";
-    authorInput.value = "";
-    pagesInput.value = 0;
-    isRead.value = "";
-
-    messageBox.innerHTML = "";
-
-    messageBox.innerHTML += "Book: " + theLibrary.join('', '') + '<br/>'
-}
-
-function addBookToLibrary(){
-    titleInput = Book.title;
-    authorInput = Book.author;
-    pagesInput = Book.pages;
-    isReadInput = Book.isRead;
-
-    display(Book.title);
-}
-
-addBookToLibrary();
-
-insert();
-*/
-
-//const book1 = new Book('Crime and Punishment', "Dostoevsky", 255, false);
-
-//theLibrary.push(book1);
-
-/*
-document.getElementById('btnAddBook').onclick = function (){
-    const nHTML = '';
-    const userInput = prompt('Enter your book: ')
-
-    theLibrary.push(userInput);
-    theLibrary.forEach(function(item){
-        nHTML += '<li>' + item + '<li>';
-    });
-
-    document.getElementById('item-list').innerHTML = '<ul>' + nHTML + '<ul>'
-}
-*/
