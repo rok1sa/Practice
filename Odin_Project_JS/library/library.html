@@ -40,12 +40,12 @@
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select><br>
-        <input type="submit" id="send"><br>
+        <button type="button" id="send" onclick="addText()">Submit Book</button><br>
         <!--input type="reset" id="reset"-->
     </form><br>
     </form>
 
-    <div id="msgBoxDisplay"></div>
+    <div class="bookDiv" id="book1Div"></div>
 
     <script src="library.js"></script>
 
@@ -92,6 +92,12 @@ p{
 
 #coloringFormText{
     color: rgb(224, 224, 224);
+}
+
+Div{
+    display: block;
+    text-align: center;
+    color: white;
 }
 
 </style>
