@@ -41,7 +41,15 @@ const theLibrary = [
     
 ];
 
+// there needs to be a func that will create new div for each book added and 
+// this func that creates divs also needs to assign id 
+// (or something to distinguish each div from each other)
+// to the div & assign values entered by user from a form.
+function addText(){
+    document.getElementById("book1Div").innerHTML = document.getElementById("title").value;
+}
 
+/*
 function addText(){
 
     //
@@ -51,50 +59,5 @@ function addText(){
         document.getElementById("Div1").innerHTML = document.getElementById('title').value;
     })
 
-}
-
-/*
-function addBookToHTML(){
-
-    /*
-    if (document.getElementById("send").click){
-
-    }*/
-    //or 
-/*
-    var isSendClicked = document.getElementById("send").addEventListener("click", function(e){
-        if(title.value){
-            document.createElement('div');
-        }
-    })
-
-    var divCreate = document.createElement('div')
-
-    theLibrary.forEach(book =>{
-
-    const bookDDiv = document.createElement('div')
-
-    this.title = title.value;
-    this.author = author.value;
-    this.pages = pages.value;
-    this.isRead = isRead.value;
-    //
-
-    libraryDisplay.appendChild(bookDDiv)
-})
 }*/
-
-
-
-
-/*
-function clearAll(){
-    const checkIfClicked = getElementById("clearAll").addEventListener("click", function(e){
-
-        title = "";
-        author = "";
-        pages = "";
-    })
-}
-*/
 
