@@ -22,8 +22,6 @@
         </p>
     </div>
 
-    <div class="booksDiv"></div>
-
     <button id="btnAddBook">Add new book</button>
 
     <form id="formGeneral">
@@ -33,23 +31,23 @@
     </form>
     <form id="formAuthor">
         <label for="author" id="coloringFormText">Book author:</label><br>
-        <input type="text" id="author" name="author"> <input type="reset" id="resetTitle"><br>
+        <input type="text" id="author" name="author"> <input type="reset" id="resetAuthor"><br>
     </form>
     <form id="formPages">
         <label for="pages" id="coloringFormText">Number of pages:</label><br>
-        <input type="number" id="pages" name="pages"> <input type="reset" id="resetTitle"><br>
+        <input type="number" id="pages" name="pages"> <input type="reset" id="resetPages"><br>
     </form>
         <label for="isRead" id="coloringFormText">Is book read?</label>
             <select name="isRead" id="isRead" type="text">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select><br>
-        <button type="button" id="send" onclick="addText()">Submit Book</button><br>
+        <button type="button" id="sendBtn">Submit Book</button><br>
         <!--input type="reset" id="reset"-->
     </form><br>
     </form>
 
-    <div class="bookDiv" id="book1Div"></div>
+    <div class="booksDiv" id="booksDiv"></div>
 
     <script src="library.js"></script> 
 
@@ -101,6 +99,10 @@ Div{
     display: block;
     text-align: center;
     color: white;
+}
+
+.booksDiv{
+    display:flex;
 }
 
 </style>
