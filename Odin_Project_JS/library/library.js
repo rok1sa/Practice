@@ -4,7 +4,7 @@ pages = document.getElementById('pages').value;
 isRead = document.getElementById('isRead').value;
 let container = document.getElementById('booksDiv'); 
 
-const theLibrary = [
+let theLibrary = [
     
 ];
 
@@ -45,22 +45,26 @@ const handleSubmit = function(){
 });*/
 
 var dataSubmittingForm = document.getElementById("sendBtn").addEventListener("click", function(){
-let newObject = {title: title, author: author, pages: pages, isRead: isRead};
-theLibrary.push(newObject);
-renderObjects();
-function renderObjects(){
+let newBook = {title: title, author: author, pages: pages, isRead: isRead};
+theLibrary.push(newBook);
+document.getElementById('title').value ="";
+document.getElementById('author').value ="";
+document.getElementById('pages').value ="";
+renderBooks();
+function renderBooks(){
     let container = document.getElementById('booksDiv'); 
     container.innerHTML ="";
-    theLibrary.forEach(function(object, index){
+    theLibrary.forEach(function(book){
         let div = document.createElement("div");
-        div.id = "object-" + index;
-        div.innerHTML = `Title: ${object.title} Author: ${object.author} Pages: ${object.pages} isRead: ${object.isRead}`;
+        //div.id = "object-" + index;
+        div.innerHTML = `Title: ${book.title} Author: ${book.author} Pages: ${book.pages} Is book read: ${book.isRead}`;
         container.appendChild(div);
     });   
 }
 
 });
 
+theLibrary.length = 0;
 
 document.querySelector('form').addEventListener('click', handleSubmit);
 
