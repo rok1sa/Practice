@@ -66,7 +66,7 @@ function renderBooks() {
         theLibrary.splice(index, 1)
         container.removeChild(div);
         //renderBooks();
-        renderBooksTable();
+        //renderBooksTable();
     });
 
     div.appendChild(deleteBtn);
@@ -74,11 +74,13 @@ function renderBooks() {
     container.appendChild(div);
 });
 
-    renderBooksTable();
+    //renderBooksTable();
 };
 
+document.getElementById('sendBtn').addEventListener('click', handleSubmit);
 
 // code that will sort/organize books as TABLE cells.
+/*
 function renderBooksTable(){
     let table = document.createElement("table");
 
@@ -87,6 +89,7 @@ function renderBooksTable(){
         let row = document.createElement("tr");
 
         // keep this code if you want to display books as a table cells
+        
         let titleCell = document.createElement('td');
         titleCell.textContent = book.title + "<br />";
         row.appendChild(titleCell);
@@ -102,6 +105,7 @@ function renderBooksTable(){
         let isReadCell = document.createElement('td');
         isReadCell.textContent = book.isRead;
         row.appendChild(isReadCell);
+        
 
         table.appendChild(row);
     }
@@ -111,9 +115,11 @@ function renderBooksTable(){
     tableContainer.appendChild(table)
     //document.body.appendChild(table);
 };
+*/
 
 
-//code that will store books in separate cards.
+
+//code that will store/organize books in separate cards.
 /*
 let container = document.createElement('div')
 for (let i = 0; i < theLibrary.length; i++) {
@@ -139,5 +145,3 @@ for (let i = 0; i < theLibrary.length; i++) {
 };
 document.body.appendChild(container);*/
 
-
-document.getElementById('sendBtn').addEventListener('click', handleSubmit);
