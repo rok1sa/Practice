@@ -48,6 +48,7 @@ function renderBooks() {
     deleteBtn.addEventListener('click', function(){
         theLibrary.splice(index, 1)
         container.removeChild(div);
+        renderBooks();
         renderBooksTable();
     });
 
@@ -57,7 +58,7 @@ function renderBooks() {
 });
 };
 
-// code that will sort/organize books
+// code that will sort/organize books in TABLE
 
 function renderBooksTable(){
 
@@ -86,6 +87,34 @@ function renderBooksTable(){
         table.appendChild(row);
     }
     document.body.appendChild(table);
-}
+};
+
+
+//code that will store books in separate cards.
+/*
+let container = document.createElement('div')
+for (let i = 0; i < theLibrary.length; i++) {
+    let book = theLibrary[i];
+
+    let card = document.createElement('div');
+    card.classList.add('book-card');
+
+    let titleElement = document.createElement('h2');
+    titleElement.textContent = book.title;
+    card.appendChild(titleElement);
+
+    let authorElement = document.createElement('p');
+    authorElement.textContent = book.author;
+    card.appendChild(authorElement);
+
+    let pagesElement = document.createElement('p');
+    pagesElement.textContent = book.pages;
+    card.appendChild(pagesElement);
+
+    container.appendChild(card);
+
+};
+document.body.appendChild(container);*/
+
 
 document.getElementById('sendBtn').addEventListener('click', handleSubmit);
