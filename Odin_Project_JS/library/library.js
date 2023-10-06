@@ -33,11 +33,23 @@ function renderBooks() {
 
     theLibrary.forEach(function(book, index) {
     let div = document.createElement("div");
+    // you can style div individually with Inline Styling:
+    // ex -> div.style.backgroundColor = "someColor"; 
+    // or using CSS classes div.classList.add("book-div-style");
+    // the second method is more flexible. Use first only for individual div styling.
     div.innerHTML = `Title: ${book.title}
     Author: ${book.author}
     Pages: ${book.pages}
     Is Read: ${book.isRead}`;
     
+    let deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = "Delete";
+    deleteBtn.addEventListener('click', function(){
+        theLibrary.splice(index, 1)
+        container.removeChild(div);
+    });
+
+    div.appendChild(deleteBtn);
 
     container.appendChild(div);
 });
