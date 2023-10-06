@@ -27,9 +27,10 @@ const handleSubmit = function(event) {
     renderBooks();
 }
 
+
 function renderBooks() {
     let container = document.getElementById('booksDiv');
-    container.innerHTML = "";
+    //container.innerHTML = "";
 
     theLibrary.forEach(function(book, index) {
     let div = document.createElement("div");
@@ -38,17 +39,33 @@ function renderBooks() {
     // or using CSS classes div.classList.add("book-div-style");
     // the second method is more flexible. Use first only for individual div styling.
     div.classList.add("book-div-style");
-    div.innerHTML = `Title: ${book.title}
-    Author: ${book.author}
-    Pages: ${book.pages}
-    Is Read: ${book.isRead}`;
+
+    
+    let titleElement = document.createElement('h2');
+    titleElement.textContent = book.title;
+    div.appendChild(titleElement);
+
+    let authorElement = document.createElement('p');
+    authorElement.textContent = "Author: " + book.author;
+    div.appendChild(authorElement);
+
+    let pagesElement = document.createElement('p');
+    pagesElement.textContent = "# Of Pages: " + book.pages;
+    div.appendChild(pagesElement);
+
+    let isReadElement = document.createElement('p');
+    isReadElement.textContent = "Is Book Read: " + book.isRead;
+    div.appendChild(isReadElement);
+    
+
+    //div.innerHTML = `Title: ${book.title}Author: ${book.author}Pages: ${book.pages}Is Read: ${book.isRead}`;
     
     let deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = "Delete";
     deleteBtn.addEventListener('click', function(){
         theLibrary.splice(index, 1)
         container.removeChild(div);
-        renderBooks();
+        //renderBooks();
         renderBooksTable();
     });
 
@@ -56,20 +73,22 @@ function renderBooks() {
 
     container.appendChild(div);
 });
+
+    renderBooksTable();
 };
 
-// code that will sort/organize books in TABLE
 
+// code that will sort/organize books as TABLE cells.
 function renderBooksTable(){
-
     let table = document.createElement("table");
 
     for (let i = 0; i < theLibrary.length; i++){
         let book = theLibrary[i];
         let row = document.createElement("tr");
 
+        // keep this code if you want to display books as a table cells
         let titleCell = document.createElement('td');
-        titleCell.textContent = book.title;
+        titleCell.textContent = book.title + "<br />";
         row.appendChild(titleCell);
 
         let authorCell = document.createElement('td');
@@ -86,7 +105,11 @@ function renderBooksTable(){
 
         table.appendChild(row);
     }
-    document.body.appendChild(table);
+
+    let tableContainer = document.getElementById('tableDiv');
+    tableContainer.innerHTML = "";
+    tableContainer.appendChild(table)
+    //document.body.appendChild(table);
 };
 
 
