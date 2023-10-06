@@ -17,11 +17,24 @@ const Book= class{
     }
 }
 
-const handleSubmit = function(){
+/*class Book {
+    constructor(author, title, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+    }
+}*/
+
+function handleSubmit(event){
+    event.preventDefault();
+}
+
+/*const handleSubmit = function(){
     let form = document.querySelector("form").addEventListener("click", function(event){
         event.preventDefault();
     });
-}
+}*/
 
 /*var dataSubmittingForm = document.getElementById("send").addEventListener("click", function(){
 
@@ -56,7 +69,6 @@ function renderBooks(){
     container.innerHTML ="";
     theLibrary.forEach(function(book){
         let div = document.createElement("div");
-        //div.id = "object-" + index;
         div.innerHTML = `Title: ${book.title} Author: ${book.author} Pages: ${book.pages} Is book read: ${book.isRead}`;
         container.appendChild(div);
     });   
