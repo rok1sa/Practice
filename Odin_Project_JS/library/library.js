@@ -37,6 +37,7 @@ function renderBooks() {
     // ex -> div.style.backgroundColor = "someColor"; 
     // or using CSS classes div.classList.add("book-div-style");
     // the second method is more flexible. Use first only for individual div styling.
+    div.classList.add("book-div-style");
     div.innerHTML = `Title: ${book.title}
     Author: ${book.author}
     Pages: ${book.pages}
@@ -56,3 +57,30 @@ function renderBooks() {
 };
 
 document.getElementById('sendBtn').addEventListener('click', handleSubmit);
+
+// code that will sort/organize books
+let table = document.createElement("table");
+
+for (let i = 0; i < theLibrary.length; i++){
+    let book = theLibrary[i];
+    let row = document.createElement("tr");
+    let titleCell = document.createElement('td');
+    titleCell.textContent = book.title;
+    row.appendChild(titleCell);
+
+    let authorCell = document.createElement('td');
+    authorCell.textContent = book.author;
+    row.appendChild(authorCell);
+
+    let pagesCell = document.createElement('td');
+    pagesCell.textContent = book.pages;
+    row.appendChild(pagesCell);
+
+    let isReadCell = document.createElement('td');
+    isReadCell.textContent = book.isRead;
+    row.appendChild(isReadCell);
+
+    table.appendChild(row);
+}
+
+document.body.appendChild(table);
