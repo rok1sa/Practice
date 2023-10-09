@@ -30,7 +30,7 @@ const handleSubmit = function(event) {
 
 function renderBooks() {
     let container = document.getElementById('booksDiv');
-    //container.innerHTML = "";
+    container.innerHTML = "";
 
     theLibrary.forEach(function(book, index) {
     let div = document.createElement("div");
@@ -65,6 +65,7 @@ function renderBooks() {
     deleteBtn.addEventListener('click', function(){
         theLibrary.splice(index, 1)
         container.removeChild(div);
+        renderBooks();
         //renderBooks();
         //renderBooksTable();
     });
