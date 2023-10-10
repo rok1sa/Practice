@@ -27,13 +27,6 @@ const handleSubmit = function(event) {
     renderBooks();
 }
 
-function check(){
-    readStatusBtn.checked = true;
-}
-function uncheck(){
-    readStatusBtn.checked = false;
-}
-
 function renderBooks() {
     let container = document.getElementById('booksDiv');
     container.innerHTML = "";
@@ -60,29 +53,22 @@ function renderBooks() {
     let isReadElement = document.createElement('p');
     isReadElement.textContent = "Is Book Read: " + book.isRead;
     div.appendChild(isReadElement);
-    let readStatusCB = document.createElement('input');
-    readStatusCB.type = 'checkbox';
-    readStatusCB.textContent = "Change book's status";
-    div.appendChild(readStatusCB);
 
-    
+    let readStatusBtn = document.createElement('button');
+    readStatusBtn.innerText = "Read status"
+    div.appendChild(readStatusBtn);
 
-
-    //func changing read stat
-
-    readStatusCB.addEventListener("change", function(){
-        function changeReadStatus(){
-            if (readStatusCB.value = true){
-                book.isRead = "Read";
-                renderBooks();
-            }
-            else{
-                book.isRead = "Not read yet";
-                renderBooks();
-            }
+    //function that toggles book's isRead status
+    readStatusBtn.addEventListener('click', function(){
+        if (book.isRead == "yes"){
+            book.isRead = "no";
+            renderBooks();
+        }
+        else{
+            book.isRead = "yes";
+            renderBooks();
         }
     })
-    
     
     let deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = "Delete";
@@ -100,4 +86,3 @@ function renderBooks() {
 };
 
 document.getElementById('sendBtn').addEventListener('click', handleSubmit);
-
