@@ -27,6 +27,12 @@ const handleSubmit = function(event) {
     renderBooks();
 }
 
+function check(){
+    readStatusBtn.checked = true;
+}
+function uncheck(){
+    readStatusBtn.checked = false;
+}
 
 function renderBooks() {
     let container = document.getElementById('booksDiv');
@@ -49,9 +55,33 @@ function renderBooks() {
     pagesElement.textContent = "# Of Pages: " + book.pages;
     div.appendChild(pagesElement);
 
+
+    
     let isReadElement = document.createElement('p');
     isReadElement.textContent = "Is Book Read: " + book.isRead;
     div.appendChild(isReadElement);
+    let readStatusCB = document.createElement('input');
+    readStatusCB.type = 'checkbox';
+    readStatusCB.textContent = "Change book's status";
+    div.appendChild(readStatusCB);
+
+    
+
+
+    //func changing read stat
+
+    readStatusCB.addEventListener("change", function(){
+        function changeReadStatus(){
+            if (readStatusCB.value = true){
+                book.isRead = "Read";
+                renderBooks();
+            }
+            else{
+                book.isRead = "Not read yet";
+                renderBooks();
+            }
+        }
+    })
     
     
     let deleteBtn = document.createElement('button');
@@ -70,3 +100,4 @@ function renderBooks() {
 };
 
 document.getElementById('sendBtn').addEventListener('click', handleSubmit);
+
