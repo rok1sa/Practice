@@ -58,7 +58,6 @@ function renderBooks() {
     readStatusBtn.innerText = "Read status"
     div.appendChild(readStatusBtn);
 
-    //function that toggles book's isRead status
     readStatusBtn.addEventListener('click', function(){
         if (book.isRead == "yes"){
             book.isRead = "no";
