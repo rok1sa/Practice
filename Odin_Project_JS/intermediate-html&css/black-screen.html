@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video controls class="full-width">
+        <source src="black-screen.mp4">
+        <!---->
+        <iframe class="full-width" src="https://player.vimeo.com/video/203945682?title=0&portrait=0" frameborder="0"
+            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe class="max-width" src="https://player.vimeo.com/video/203945682?title=0&portrait=0" frameborder="0"
+            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+    </video>
+    <style>
+        .full-width {
+            width: 100vw;
+            height: calc(100vw *(9/16));
+            max-width: 100vw;
+            max-height: calc(30em * (9/16));
+        }
+        /**/
+        body {
+            --ratio: 360 / 640;
+        }
+
+        .full-width {
+            width: 100vw;
+            height: calc(100vw * var(--ratio));
+        }
+        .max-width {
+            --container-width: 30em;
+
+            height: calc(100vw * var(--ratio));
+            max-height: calc(var(--container-width) * var(--ratio));
+
+            width: 100%;
+            max-width: var(--container-width);
+        }
+
+        iframe {
+            display: block;
+            margin: 0 auto 1em;
+        }
+        .full-width{
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+    </style>
+</body>
+
+</html>
