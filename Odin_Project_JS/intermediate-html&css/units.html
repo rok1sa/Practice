@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+        <h1><strong>Application</strong></h1>
+    <nav>
+        <h2>My projects</h2>
+        <ul>
+            <li><a href="#">Project 1</a></li>
+            <li><a href="#">Project 2</a></li>
+            <li><a href="#">Project 3</a></li>
+            <li><a href="#">Project 4</a></li>
+            <li><a href="#">Project 5</a></li>
+            <li><a href="#">Project 6</a></li>
+            <li><a href="#">Project 7</a></li>
+            <li><a href="#">Project 8</a></li>
+            <li><a href="#">Project 9</a></li>
+            <li><a href="#">Project 10</a></li>
+        </ul>
+    </nav>
+
+    <article>
+        <h2>Project Title</h2>
+        <p>
+            All the main content lives here. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis, aspernatur magnam porro nobis quisquam voluptatum illum incidunt, cupiditate laudantium, odio distinctio sunt facere iure corporis numquam alias fuga nihil velit?
+        </p>
+    </article>
+
+    <style>
+        body{
+            height: 100vh;
+        }
+        body{
+            display: grid;
+            grid-template-areas: 'header header'
+                                ' nav main'
+                                'footer footer';
+            grid-template-columns: minmax(auto, 12em) 5fr;
+            grid-template-rows: auto 1fr auto;
+        }
+        h1{
+            grid-area: header;
+        }
+        footer{
+            grid-area: footer;
+        }
+        nav{
+            grid-area: nav;
+        }
+        article{
+            grid-area: main;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        h1, footer {
+            background: rgb(240, 231, 231)
+        }
+
+        nav{
+            border-right: 1px solid rgb(240, 231, 231);
+        }
+
+        nav, article{
+            overflow-y: auto;
+        }
+        h1, nav, article, footer{
+            padding: 1rem;
+        }
+    </style>
+    
+    <footer>ME©</footer>
+</body>
+</html>
