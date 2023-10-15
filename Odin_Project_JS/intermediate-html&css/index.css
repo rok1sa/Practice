@@ -1,5 +1,14 @@
 h1 {
   color: red;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.vh{
+  height: 10vh;
+}
+.vw{
+  width: 100vw;
 }
 
 .container {
@@ -52,3 +61,49 @@ caption {
         background-color: red;
     }
     */
+
+li{
+  font-size: 80%;
+}
+.box{
+  opacity: 1;
+  width: 10rem;
+  border-style: solid;
+  border-color: rgb(255, 230, 0);
+}
+.box::after{
+  content: ' This is a string in CSS.'
+}
+.one {
+  background-color: antiquewhite;
+}
+
+.two {
+  background-color: blueviolet;
+}
+
+.three {
+  background-color: greenyellow;
+}
+.four {
+  background-color: #02798b;
+}
+
+.five {
+  background-color: #c55da1;
+}
+
+.six {
+  background-color: #128a7d;
+}
+.seven {
+  background-color: rgb(2 121 139);
+}
+
+.eight {
+  background-color: rgb(197 93 161);
+}
+
+.nine {
+  background-color: rgb(18 138 125 / .9);
+}
