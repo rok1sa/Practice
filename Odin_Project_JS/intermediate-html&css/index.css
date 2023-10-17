@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/*or use downloaded font
+@fontface{
+  font-family: font-name;
+  src: url(../fonts/the-font-file.ttf);
+}*/
 body{
   font-size: calc(16px + 1vw);
   line-height: calc(1.1 em + 0.5vw)
@@ -7,6 +13,7 @@ h1 {
   color: red;
   font-size: 4rem;
   text-align: center;
+  font-style: italic;
 }
 
 .vh{
@@ -160,4 +167,6 @@ img {
 /* Body */
 body {
   background: #ccc;
+  /*font-family: 'Times New Roman', sans-serif; */
+  font-family: 'Roboto', sans-serif;
 }
