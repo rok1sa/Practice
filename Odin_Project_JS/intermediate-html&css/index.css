@@ -13,7 +13,7 @@ h1 {
   color: red;
   font-size: 4rem;
   text-align: center;
-  font-style: italic;
+  text-shadow: #FC0 1px 0 10px;
 }
 
 .vh{
@@ -170,3 +170,23 @@ body {
   /*font-family: 'Times New Roman', sans-serif; */
   font-family: 'Roboto', sans-serif;
 }
+
+.wide{
+  font-size: 24px;
+  letter-spacing: 0.4rem;
+}
+.narrow{
+  font-size: 48px;
+  letter-spacing: -0.15rem;
+}
+
+p.line-height {
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+/*
+.overflowing{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}*/
