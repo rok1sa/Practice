@@ -30,7 +30,7 @@ def moderate_group_messages(message):
     for word in blacklist:
         if word in message.text:
             bot.delete_message(message.chat.id, message.message_id)
-            break  # Break the loop after deleting the message to avoid multiple deletions
+            break 
 
 @bot.message_handler(commands=['remove_word'])
 def remove_word_from_blacklist(message):
@@ -43,7 +43,7 @@ def remove_word_from_blacklist(message):
     else:
         bot.reply_to(message, f"{bl_word} isn't in the blacklist")
 
-# i think its kinda like adding words to the blackl directly. ll look into it tomorrow
+# Handler for private messages (I think?)
 @bot.message_handler(func=lambda message: any(word in message.text for word in blacklist))
 def delete_blacklisted_messages(message):
     bot.delete_message(message.chat.id, message.message_id)
@@ -62,5 +62,3 @@ def greet(message):
     bot.reply_to(message, 'Hey! How is it going?')
 
 bot.polling()
-#list 1 = ['hello']
-#list.text.split()
