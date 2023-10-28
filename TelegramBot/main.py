@@ -32,14 +32,17 @@ def moderate_group_messages(message):
             bot.delete_message(message.chat.id, message.message_id)
             break 
 
-@bot.message_handler(commands=['remove_word'])
+@bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['remove_word'])
 def remove_word_from_blacklist(message):
-    bl_word = message.text.split('/remove_word')[1].strip()
+    bl_word = message.text.split('/remove_word')[1].strip().lower()
+    print('Word to Remove:', repr(bl_word))
     print("Current blacklist:", blacklist)
+    lowercase_blacklist = [word.lower() for word in blacklist]
     if bl_word in blacklist:
-        blacklist.remove(bl_word)
+        removed_word = blacklist.pop(lowercase_blacklist.index(bl_word))
+        #blacklist.remove(bl_word)
         print('Updated blacklist:', blacklist)
-        bot.reply_to(message, f"Removed{bl_word} from the blacklist.")
+        bot.reply_to(message, f'Removed {bl_word}')
     else:
         bot.reply_to(message, f"{bl_word} isn't in the blacklist")
 
