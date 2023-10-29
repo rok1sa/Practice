@@ -4,15 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Keys for Telegram's API
-# api_id = os.getenv('api_id')
-# api_hash = os.getenv('api_hash')
-
 # Keys
 API_KEY = os.getenv('API_KEY')
 
 bot = telebot.TeleBot(API_KEY)
 blacklist = []
+authorized_users = [460602189]
 
 # Handler for private messages to add blacklisted words
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
