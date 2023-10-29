@@ -9,15 +9,19 @@ API_KEY = os.getenv('API_KEY')
 
 bot = telebot.TeleBot(API_KEY)
 blacklist = []
-authorized_users = [460602189]
+authorized_users = 
 
 # Handler for private messages to add blacklisted words
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
 def add_word_to_blacklist_private(message):
-    bl_word = message.text.split('/add_word')[1].strip()
-    if bl_word:
-        blacklist.append(bl_word)
-        bot.reply_to(message, f"Added '{bl_word}' to the blacklist.")
+    user_id = message.from_user.id
+    if user_id in authorized_users:
+        bl_word = message.text.split('/add_word')[1].strip()
+        if bl_word:
+            blacklist.append(bl_word)
+            bot.reply_to(message, f"Added '{bl_word}' to the blacklist.")
+    else:
+        bot.reply_to(message, 'You are not authorized to use this command.')
 
 # Handler for group messages to moderate blacklisted words
 @bot.message_handler(func=lambda message: message.chat.type == 'group' or message.chat.type == 'supergroup')
@@ -31,10 +35,12 @@ def moderate_group_messages(message):
 
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['remove_word'])
 def remove_word_from_blacklist(message):
-    bl_word = message.text.split('/remove_word')[1].strip().lower()
-    print('Word to Remove:', repr(bl_word))
-    print("Current blacklist:", blacklist)
-    lowercase_blacklist = [word.lower() for word in blacklist]
+    user_id = message.from_user.id
+    if user_id in authorized_users:
+        bl_word = message.text.split('/remove_word')[1].strip().lower()
+        #print('Word to Remove:', repr(bl_word))
+        #print("Current blacklist:", blacklist)
+        lowercase_blacklist = [word.lower() for word in blacklist]
     if bl_word in blacklist:
         removed_word = blacklist.pop(lowercase_blacklist.index(bl_word))
         #blacklist.remove(bl_word)
