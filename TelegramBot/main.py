@@ -9,7 +9,7 @@ API_KEY = os.getenv('API_KEY')
 
 bot = telebot.TeleBot(API_KEY)
 blacklist = []
-authorized_users = 
+authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
 # Handler for private messages to add blacklisted words
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
@@ -38,16 +38,14 @@ def remove_word_from_blacklist(message):
     user_id = message.from_user.id
     if user_id in authorized_users:
         bl_word = message.text.split('/remove_word')[1].strip().lower()
-        #print('Word to Remove:', repr(bl_word))
-        #print("Current blacklist:", blacklist)
-        lowercase_blacklist = [word.lower() for word in blacklist]
-    if bl_word in blacklist:
-        removed_word = blacklist.pop(lowercase_blacklist.index(bl_word))
-        #blacklist.remove(bl_word)
-        print('Updated blacklist:', blacklist)
-        bot.reply_to(message, f'Removed {bl_word}')
+        if bl_word in blacklist:
+            removed_word = blacklist.remove(bl_word)
+            bot.reply_to(message, f"Removed '{bl_word}' from the blacklist.")
+        else:
+            bot.reply_to(message, f"'{bl_word}' isn't in the blacklist.")
     else:
-        bot.reply_to(message, f"{bl_word} isn't in the blacklist")
+        bot.reply_to(message, "You are not authorized to use this command.")
+
 
 # Handler for private messages (I think?)
 @bot.message_handler(func=lambda message: any(word in message.text for word in blacklist))
