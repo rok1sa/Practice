@@ -3,10 +3,32 @@ import telebot
 from dotenv import load_dotenv
 import mysql.connector
 from flask import Flask, render_template, jsonify
-blacklist = []
+import threading
+import socket
+load_dotenv()
 API_KEY = os.getenv('API_KEY')
 bot = telebot.TeleBot(API_KEY)
+blacklist = []
+
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
+
+def find_available_port(start_port, end_port):
+    for port in range(start_port, end_port + 1):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if s.connect_ex(('127.0.0.1', port)) != 0:
+                return port
+    return None
+
+start_port = 5000
+end_port = 6000
+
+available_port = find_available_port(start_port, end_port)
+
+if available_port is not None:
+    print(f'Available port found: {available_port}')
+else:
+    print("No available ports found in the specified range.")
+
 
 app = Flask(__name__)
 @app.route("/")
@@ -18,9 +40,24 @@ def get_blacklist():
     return jsonify(blacklist)
 
 if __name__ == '__main__':
+    app.run(port=available_port)
+
+def run_flask_app():
     app.run()
 
-load_dotenv()
+def run_telegram_bot():
+    bot.polling()
+
+if __name__ == '__main__':
+    print('Starting Flask app..')
+    flask_thread = threading.Thread(target=run_flask_app)
+    flask_thread.daemon = True
+    flask_thread.start()
+
+    print('Starting Telegram bot...')
+    bot_thread = threading.Thread(target=run_telegram_bot)
+    bot_thread.daemon = True
+    bot_thread.start()
 
 # Replace these with your actual MySQL credentials
 db_config = {
