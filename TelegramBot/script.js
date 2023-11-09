@@ -18,20 +18,3 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     })
 }) 
-
-/*
-document.getElementById('loadBlacklist').addEventListener('click', function(){
-    fetch('/get_blacklist')
-    .then(response => response.json())
-    .then(data =>{
-        const blacklist = document.getElementById('blacklist');
-        blacklist.innerHTML = '';
-        data.forEach(word => {
-            // or use div= document.getElementById("blacklistContainer").textContent = data.blacklist;
-
-            const listItem = document.createElement('li');
-            listItem.textContent = word;
-            blacklist.appendChild(listItem);
-        });
-    });
-})*/
