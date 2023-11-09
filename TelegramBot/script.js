@@ -7,14 +7,22 @@ if (var1 >= 15){
 
 document.addEventListener('DOMContentLoaded', function(){
     const blacklistElementForDisplay = document.getElementById('blacklist');
+    const loadBlacklistButton = document.getElementById('loadBlacklist');
 
-    fetch('/get_blacklist')
-    .then(response => response.json())
-    .then(data =>{
-        const blacklist = data.blacklist;
+    loadBlacklistButton.addEventListener('click', function(){
+        fetch('/get_blacklist')
+        .then(response => response.json())
+        .then(data =>{
+            const blacklist = data.blacklist;
 
-        blacklist.forEach(word =>{
-            document.getElementById('blacklist').textContent = data.blacklist;
-        })
-    })
-}) 
+            blacklistElementForDisplay.innerHTML = '';
+    
+            blacklist.forEach(word =>{
+                const blElement = document.createElement('div');
+                blElement.textContent = word;
+                blacklistElementForDisplay.appendChild(blElement);
+            });
+        });
+
+    });
+});
