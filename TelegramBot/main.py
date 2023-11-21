@@ -75,7 +75,7 @@ def add_word_to_database(bl_word):
         cursor.execute(insert_query, (bl_word,))
         db_connection.commit()
         db_connection.close()
-    except:
+    except mysql.connector.Error as err:
         print(f'Error adding word to database: {err}')
 
 def synchronize_blacklist():
@@ -161,8 +161,7 @@ try:
     bot.polling(none_stop=True)
 except Exception as e:
     print(f"Error: {e}")
-
+    
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     print(f'Received message: {message.text}')
-
