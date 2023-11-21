@@ -12,6 +12,7 @@ bot = telebot.TeleBot(API_KEY)
 blacklist = []
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
+#Ports
 def find_available_port(start_port, end_port):
     for port in range(start_port, end_port + 1):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -29,6 +30,8 @@ if available_port is not None:
 else:
     print("No available ports found in the specified range.")
 
+
+#Flask 
 app = Flask(__name__)
 
 @app.route("/")
@@ -44,6 +47,9 @@ def run_flask_app():
 
 def run_telegram_bot():
     bot.polling(none_stop=True)
+
+
+#For the connection to the mysql db
 
 db_config = {
     "user": "root",
@@ -62,12 +68,16 @@ def connect_to_database():
     )
 
 def add_word_to_database(bl_word):
-    db_connection = connect_to_database()
-    cursor = db_connection.cursor()
-    insert_query = 'INSERT INTO blacklist (phrase) VALUES (%s)'
-    cursor.execute(insert_query, (bl_word,))
-    db_connection.commit()
-    db_connection.close()
+    try:
+        db_connection = connect_to_database()
+        cursor = db_connection.cursor()
+        print(f'Adding word to database: {bl_word}')
+        insert_query = 'INSERT INTO blacklist (phrase) VALUES (%s)'
+        cursor.execute(insert_query, (bl_word,))
+        db_connection.commit()
+        db_connection.close()
+    except:
+        print(f'Error adding word to database: {err}')
 
 def synchronize_blacklist():
     global blacklist
@@ -147,6 +157,11 @@ def show_list(message):
 @bot.message_handler(commands=['Greet'])
 def greet(message):
     bot.reply_to(message, 'Hey! How is it going?')
+
+try:
+    bot.polling(none_stop=True)
+except Exception as e:
+    print(f"Error: {e}")
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
