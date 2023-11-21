@@ -50,7 +50,6 @@ def run_telegram_bot():
 
 
 #For the connection to the mysql db
-
 db_config = {
     "user": "root",
     "password": "PASSWORD",
