@@ -5,11 +5,11 @@ import mysql.connector
 from flask import Flask, render_template, jsonify
 import threading
 import socket
+
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
 bot = telebot.TeleBot(API_KEY)
 blacklist = []
-
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
 def find_available_port(start_port, end_port):
@@ -29,8 +29,8 @@ if available_port is not None:
 else:
     print("No available ports found in the specified range.")
 
-
 app = Flask(__name__)
+
 @app.route("/")
 def index():
     return render_template("index.html", blacklist=blacklist)
@@ -39,36 +39,59 @@ def index():
 def get_blacklist():
     return jsonify(blacklist)
 
-if __name__ == '__main__':
+def run_flask_app():
     app.run(port=available_port)
 
-def run_flask_app():
-    app.run()
-
 def run_telegram_bot():
-    bot.polling()
+    bot.polling(none_stop=True)
 
-if __name__ == '__main__':
-    print('Starting Flask app..')
-    flask_thread = threading.Thread(target=run_flask_app)
-    flask_thread.daemon = True
-    flask_thread.start()
-
-    print('Starting Telegram bot...')
-    bot_thread = threading.Thread(target=run_telegram_bot)
-    bot_thread.daemon = True
-    bot_thread.start()
-
-# Replace these with your actual MySQL credentials
 db_config = {
     "user": "root",
     "password": "PASSWORD",
-    "host": "localhost",  # or the appropriate hostname if not running on localhost
+    "host": "localhost",  
     "database": "admin",
-    "port": 3306,  # or the appropriate port number
+    "port": 3306,  
 }
 
-# Handler for private messages to add blacklisted words
+def connect_to_database():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="PASSWORD",
+        database="admin"
+    )
+
+def add_word_to_database(bl_word):
+    db_connection = connect_to_database()
+    cursor = db_connection.cursor()
+    insert_query = 'INSERT INTO blacklist (phrase) VALUES (%s)'
+    cursor.execute(insert_query, (bl_word,))
+    db_connection.commit()
+    db_connection.close()
+
+def synchronize_blacklist():
+    global blacklist
+    db_connection = connect_to_database()
+    cursor = db_connection.cursor()
+    cursor.execute('SELECT phrase FROM blacklist')
+    blacklist = [row[0] for row in cursor.fetchall()]
+    db_connection.close()
+
+if __name__ == '__main__':
+    synchronize_blacklist()
+
+    # Run Flask in the main thread
+
+    flask_thread = threading.Thread(target=run_flask_app)
+    flask_thread.start()
+    # Run the Telegram bot polling in the main thread
+    telegram_thread = threading.Thread(target=run_telegram_bot)
+    telegram_thread.start()
+
+    flask_thread.join()
+    telegram_thread.join()
+
+#The bot commands:
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
 def add_word_to_blacklist_private(message):
     user_id = message.from_user.id
@@ -125,41 +148,7 @@ def show_list(message):
 def greet(message):
     bot.reply_to(message, 'Hey! How is it going?')
 
-try:
-    # Connect to the MySQL server
-    connection = mysql.connector.connect(**db_config)
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    print(f'Received message: {message.text}')
 
-    def connect_to_database():
-        db_connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="PASSWORD",
-            database="admin"
-        )
-        return db_connection
-
-    def add_word_to_database(bl_word):
-        db_connection = connect_to_database()
-        cursor = db_connection.cursor()
-        insert_query = 'INSERT INTO blacklist (word) VALUES (%s)'
-        cursor.execute(insert_query, (bl_word,))
-        db_connection.commit()
-        db_connection.close()
-
-    def synchronize_blacklist():
-        global blacklist
-        db_connection = connect_to_database()
-        cursor = db_connection.cursor()
-        cursor.execute('SELECT word FROM blacklist')
-        blacklist = [row[0] for row in cursor.fetchall()]
-        db_connection.close()
-
-    if __name__ == '__main__':
-        synchronize_blacklist()
-        bot.polling()
-
-except mysql.connector.Error as err:
-    print(f"Error: {err}")
-finally:
-    if connection:
-        connection.close()
