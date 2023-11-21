@@ -8,7 +8,7 @@ bot = telebot.TeleBot(API_KEY)
 blacklist = []
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
-#The bot commands:
+# The rest of your bot commands
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
 def add_word_to_blacklist_private(message):
     user_id = message.from_user.id
@@ -16,7 +16,6 @@ def add_word_to_blacklist_private(message):
         # Extract the entire message text
         bl_word = message.text.split('/add_word', 1)[1].strip()
         if bl_word:
-            add_word_to_database(bl_word)
             blacklist.append(bl_word)
             bot.reply_to(message, f"Added '{bl_word}' to the blacklist.")
         else:
@@ -65,7 +64,10 @@ def show_list(message):
 def greet(message):
     bot.reply_to(message, 'Hey! How is it going?')
 
+try:
+    bot.polling(none_stop=True)
+except Exception as e:
+    print(f"Error: {e}")
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     print(f'Received message: {message.text}')
-
