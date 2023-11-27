@@ -3,8 +3,9 @@ import telebot
 from dotenv import load_dotenv
 import mysql.connector
 from flask import Flask, render_template, jsonify
-import threading
 import socket
+import threading
+
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -89,16 +90,18 @@ def synchronize_blacklist():
 if __name__ == '__main__':
     synchronize_blacklist()
 
-    # Run Flask in the main thread
+    run_flask_app()
 
-    flask_thread = threading.Thread(target=run_flask_app)
-    flask_thread.start()
-    # Run the Telegram bot polling in the main thread
-    telegram_thread = threading.Thread(target=run_telegram_bot)
-    telegram_thread.start()
-
-    flask_thread.join()
-    telegram_thread.join()
+    run_telegram_bot()
+    
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        print(f'Error: {e}')
+    
+    @bot.message_handler(func=lambda message: True)
+    def echo_all(message):
+        print(f'Received message: {message.text}')
 
 #The bot commands:
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
