@@ -14,7 +14,6 @@ blacklist = []
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
 
-
 #fff im not sure if this will work.
 # MySQL setup
 db_config = {

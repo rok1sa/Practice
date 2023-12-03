@@ -13,20 +13,8 @@ bot = telebot.TeleBot(API_KEY)
 blacklist = []
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
-# Flask setup
-app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template("index.html", blacklist=blacklist)
-
-@app.route("/get_blacklist")
-def get_blacklist():
-    return jsonify(blacklist)
-
-def run_flask_app():
-    app.run(port=5000)  # Change port as needed
-
+#fff im not sure if this will work.
 # MySQL setup
 db_config = {
     "user": "root",
@@ -59,23 +47,7 @@ def synchronize_blacklist():
     blacklist = [row[0] for row in cursor.fetchall()]
     db_connection.close()
 
-if __name__ == '__main__':
-    synchronize_blacklist()
-
-    # Run Flask in a separate thread
-    flask_thread = threading.Thread(target=run_flask_app)
-    flask_thread.start()
-
-    try:
-        bot.polling(none_stop=True)
-    except Exception as e:
-        print(f'Error: {e}')
-
-    flask_thread.join()
-
-    @bot.message_handler(func=lambda message: True)
-    def echo_all(message):
-        print(f'Received message: {message.text}')
+### fff
 
 #The bot commands:
 @bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
