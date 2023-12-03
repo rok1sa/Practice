@@ -5,7 +5,7 @@ import mysql.connector
 from flask import Flask, render_template, jsonify
 import socket
 import threading
-
+import atexit
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -13,26 +13,7 @@ bot = telebot.TeleBot(API_KEY)
 blacklist = []
 authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').split(',')]
 
-#Ports
-def find_available_port(start_port, end_port):
-    for port in range(start_port, end_port + 1):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            if s.connect_ex(('127.0.0.1', port)) != 0:
-                return port
-    return None
-
-start_port = 5000
-end_port = 6000
-
-available_port = find_available_port(start_port, end_port)
-
-if available_port is not None:
-    print(f'Available port found: {available_port}')
-else:
-    print("No available ports found in the specified range.")
-
-
-#Flask 
+# Flask setup
 app = Flask(__name__)
 
 @app.route("/")
@@ -44,28 +25,19 @@ def get_blacklist():
     return jsonify(blacklist)
 
 def run_flask_app():
-    app.run(port=available_port)
+    app.run(port=5000)  # Change port as needed
 
-def run_telegram_bot():
-    bot.polling(none_stop=True)
-
-
-#For the connection to the mysql db
+# MySQL setup
 db_config = {
     "user": "root",
     "password": "PASSWORD",
-    "host": "localhost",  
+    "host": "localhost",
     "database": "admin",
-    "port": 3306,  
+    "port": 3306,
 }
 
 def connect_to_database():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="PASSWORD",
-        database="admin"
-    )
+    return mysql.connector.connect(**db_config)
 
 def add_word_to_database(bl_word):
     try:
@@ -90,15 +62,17 @@ def synchronize_blacklist():
 if __name__ == '__main__':
     synchronize_blacklist()
 
-    run_flask_app()
+    # Run Flask in a separate thread
+    flask_thread = threading.Thread(target=run_flask_app)
+    flask_thread.start()
 
-    run_telegram_bot()
-    
     try:
         bot.polling(none_stop=True)
     except Exception as e:
         print(f'Error: {e}')
-    
+
+    flask_thread.join()
+
     @bot.message_handler(func=lambda message: True)
     def echo_all(message):
         print(f'Received message: {message.text}')
@@ -111,7 +85,7 @@ def add_word_to_blacklist_private(message):
         # Extract the entire message text
         bl_word = message.text.split('/add_word', 1)[1].strip()
         if bl_word:
-            add_word_to_database(bl_word)
+            #add_word_to_database(bl_word)
             blacklist.append(bl_word)
             bot.reply_to(message, f"Added '{bl_word}' to the blacklist.")
         else:
@@ -168,3 +142,11 @@ except Exception as e:
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     print(f'Received message: {message.text}')
+
+# Handle cleanup on script termination
+def cleanup():
+    print("Cleaning up...")
+    bot.stop_polling()
+
+# Register cleanup function
+atexit.register(cleanup)

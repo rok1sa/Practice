@@ -12,6 +12,15 @@
     <h2>Here is test button that will show you blacklist if you click on it</h2>
     <div id="blacklist"></div>
     <button id="loadBlacklist">Display bl</button>
+
+    <h1>Blacklist</h1>
+    <ul>
+        {% for word in blacklist %}
+            <li>{{ word }}</li>
+        {% endfor %}
+    </ul>
+
     <script src="script.js"></script>
+
 </body>
 </html>
