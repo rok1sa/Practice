@@ -15,7 +15,13 @@ authorized_users = [int(user_id) for user_id in os.getenv('AUTHORIZED_USERS').sp
 
 
 #fff im not sure if this will work.
-# MySQL setup
+# server.py
+from flask import Flask, render_template, jsonify, request
+import mysql.connector
+
+app = Flask(__name__)
+
+# For the connection to the MySQL database
 db_config = {
     "user": "root",
     "password": "PASSWORD",
@@ -25,7 +31,12 @@ db_config = {
 }
 
 def connect_to_database():
-    return mysql.connector.connect(**db_config)
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="PASSWORD",
+        database="admin"
+    )
 
 def add_word_to_database(bl_word):
     try:
@@ -39,13 +50,31 @@ def add_word_to_database(bl_word):
     except mysql.connector.Error as err:
         print(f'Error adding word to database: {err}')
 
-def synchronize_blacklist():
-    global blacklist
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/get_blacklist")
+def get_blacklist():
     db_connection = connect_to_database()
     cursor = db_connection.cursor()
     cursor.execute('SELECT phrase FROM blacklist')
     blacklist = [row[0] for row in cursor.fetchall()]
     db_connection.close()
+    return jsonify(blacklist=blacklist)
+
+@app.route("/add_word", methods=["POST"])
+def add_word():
+    data = request.json
+    bl_word = data.get("word")
+    if bl_word:
+        add_word_to_database(bl_word)
+        return jsonify(status="success")
+    else:
+        return jsonify(status="error", message="Word cannot be empty")
+
+if __name__ == "__main__":
+    app.run(port=8000)
 
 ### fff
 

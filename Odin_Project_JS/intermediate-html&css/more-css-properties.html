@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <text id="text">
+    <h1><strong><i><sub>MORE CSS PROPERTIES</sub></i></strong></h1>
+    <div id="div_1"><small>yeah im pro in CSS lol</small></div>
+    
+    <p id="lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aperiam vero facilis saepe nobis ab nam unde sapiente placeat minus, omnis esse, laudantium rem minima tenetur ducimus blanditiis pariatur aliquam.</p>
+
+    <p class="topbanner">
+        star<br>
+        this is a star
+    </p>
+    <p class="warning">Here is a paragraph</p>
+    
+    <p class="test1">
+        hello! this is a test
+        <image src="cat-image.jpg"></image><br><br>
+        CAT CAT CAT CAT CAT CAT CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT
+        CAT CAT CAT CAT CAT CAT        
+    </p>
+
+    <p id="opacityTest">
+        Opacity Opacity Opacity
+    </p>
+
+    <div id="overflowTest">This text is really long and the height of its container is only 150 pixels. Therefore, a scrollbar is added to help the reader to scroll the content. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</div>
+
+    <main class="parent">
+        <div class="child group1">
+            <div class="grand-child group1"></div>
+        </div>
+        <div class="child group2">
+            <div class="grand-child group2"></div>
+        </div>
+        <div class="child group3">
+            <div class="grand-child group3"></div>
+        </div>
+    </main>
+
+    <ul>
+            <p>are you hungry?</p>
+            <input type="checkbox">
+            <input type="submit">
+
+            <p>are you sick?</p>
+            <input type="checkbox">
+            <input type="submit">
+            <p class="smallText">mmmhm... this is a fake button lol</p>
+
+    </ul>
+
+    </text>
+
+    <style>
+        h1{
+            text-align:center;
+        }
+        #lorem{
+            text-align:center;
+        }
+        #div_1{
+            text-align: center;
+        }
+        body{
+            /*background: rgb(0, 0, 0);*/
+            /*background: content-box radial-gradient(crimson, skyblue);*/
+            /*background: url("/Odin_Project_JS/intermediate-html&css/cat-image.jpg")*/
+            background-color:rgb(93, 129, 40);
+            background-repeat:no-repeat
+
+            }
+        #text{
+            font-family:comic sans ms;
+            font-size:200%;
+            color:rgb(255, 200, 0);
+            -webkit-text-stroke:1px black;
+        }
+        .topbanner{
+            background:url(star1.png) rgb(117, 117, 225) repeat-y fixed;
+            border: 4mm ridge rgba(211, 220, 50, .6);
+            border-color: yellowgreen;
+            border-radius:1vh;
+        }
+        .warning {
+            background: rgb(255, 255, 255);
+            box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+        
+        }
+        .test1{
+            border: thick dotted rgb(23, 255, 23);
+            border-radius: 3px 5px 9px 20%;
+            /*overflow:scroll hidden ;*/
+            overflow: hidden scroll;
+            width: 80%;
+            height: 150px;
+        }
+        #overflowTest{
+            background-color: darkolivegreen;
+            color:white;
+            border:dashed thick rgb(255, 0, 179);
+            font-family: sans-serif;
+            padding: 15px;
+            width:50%;
+            height: 150px;
+            overflow:scroll;
+        }
+        img{
+            border-radius: 10px 10%;
+            width: 150px;
+        }
+        #opacityTest{
+            background: rgba(0, 0, 0, 0.4);
+            color:white;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            opacity:0.99;
+        }
+        .smallText{
+            font-size:17px;
+            color: white;
+        }
+        main div{
+            /*css code!*/
+        }
+    </style>
+</body>
+</html>

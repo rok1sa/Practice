@@ -13,12 +13,17 @@
     <div id="blacklist"></div>
     <button id="loadBlacklist">Display bl</button>
 
-    <h1>Blacklist</h1>
-    <ul>
-        {% for word in blacklist %}
-            <li>{{ word }}</li>
-        {% endfor %}
-    </ul>
+    
+    <h1><strong>BL Manager</strong></h1>
+
+    <form id="addWordForm">
+        <label for="word">Add Word to Blacklist:</label>
+        <input type="text" id="word" name="word" required>
+        <button type="submit">Add</button>
+    </form>
+    
+    <h2>Current Blacklist:</h2>
+    <ul id="blacklist"></ul>
 
     <script src="script.js"></script>
 
