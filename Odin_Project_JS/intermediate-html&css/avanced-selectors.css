@@ -1,0 +1,26 @@
+h1{
+    font-family:'Courier New', Courier, monospace
+}
+
+/*This will select ONLY the child class*/
+main > div{
+    /*CSS Code*/
+}
+/*This will select ONLY the grand-child class*/
+main > div > div{
+    /*CSS Code*/
+}
+
+/*This will select ONLY the class child group2*/
+.group1 + div{
+    /*CSS Code*/
+}
+/*This will select ONLY the class grand-child group2*/
+.group1 + div + div{
+    /*CSS Code*/
+}
+
+/* This rule will select all of .group1's siblings - in this case the 2nd and 3rd .child divs */
+.group1 ~div{
+    /*CSS Code*/
+}

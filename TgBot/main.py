@@ -57,7 +57,7 @@ def add_word_to_blacklist_private(message):
         # Extract the entire message text
         bl_word = message.text.split('/add_word', 1)[1].strip()
         if bl_word:
-            add_word_to_database(bl_word)
+            #add_word_to_database(bl_word)
             blacklist.append(bl_word)
             bot.reply_to(message, f"Added '{bl_word}' to the blacklist.")
         else:
