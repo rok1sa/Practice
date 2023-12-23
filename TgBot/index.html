@@ -26,12 +26,12 @@
     <ul id="blacklist"></ul>
 
     <h1>Blacklist</h1>
-    <ul>
+    <ul id="blacklist">
         {% for word in blacklist %}
-            <li>{{ word }}</li>
+            <li>{{ word }} <button onclick="removeWord('{{ word }}')">Remove</button></li>
         {% endfor %}
     </ul>
-    <input type="text" id="newWord" placeholder="=New word">
+    <input type="text" id="newWord" placeholder="New word">
     <button onclick="addWord()">Add Word</button>
 
     <script>
@@ -47,7 +47,7 @@
                         location.reload();
                     }
                 });
-            }
+            } /*tf this all means??*/
         }
 
         function removeWord(word) {
