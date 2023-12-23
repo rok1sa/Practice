@@ -2,10 +2,12 @@ import os
 import telebot
 from dotenv import load_dotenv
 import mysql.connector
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import socket
 import threading
 import atexit
+
+app = Flask(__name__)
 
 
 load_dotenv()
@@ -75,6 +77,10 @@ def synchronize_blacklist():
     db_connection.close()
 
     blacklist = blacklist_db
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 ### fff
 
@@ -150,6 +156,18 @@ except Exception as e:
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     print(f'Received message: {message.text}')
+
+@app.route('/add_word', methods=['POST'])
+def add_word():
+    word = request.form.get('word')
+    add_word_to_database(word)
+    return jsonify(success=True)
+
+@app.route('/remove_word', methods=['POST'])
+def remove_word():
+    word = request.form.get('word')
+    remove_word_from_database(word)
+    return jsonify(success=True)
 
 # Handle cleanup on script termination
 def cleanup():
