@@ -79,7 +79,7 @@ def synchronize_blacklist():
 ### fff
 
 #The bot commands:
-@bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word'])
+@bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['add_word', 'add'])
 def add_word_to_blacklist_private(message):
     user_id = message.from_user.id
     if user_id in authorized_users:
@@ -95,7 +95,7 @@ def add_word_to_blacklist_private(message):
         bot.reply_to(message, 'You are not authorized to use this command.')
 
 
-@bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['remove_word'])
+@bot.message_handler(func=lambda message: message.chat.type == 'private', commands=['remove_word', 'remove'])
 def remove_word_from_blacklist(message):
     user_id = message.from_user.id
     if user_id in authorized_users:
@@ -127,18 +127,20 @@ def moderate_group_messages(message):
 def delete_blacklisted_messages(message):
     bot.delete_message(message.chat.id, message.message_id)
 
-@bot.message_handler(commands=['show_list'])
+@bot.message_handler(commands=['show_list', 'show'])
 def show_list(message):
     synchronize_blacklist()
     if not blacklist:
         bot.send_message(message.chat.id, 'The blacklist is empty.')
+        print('Prompt for an EMPTY blacklist')
     else:
         
         blacklist_text = '\n'.join(blacklist)
         bot.send_message(message.chat.id, f'Blacklist:\n{blacklist_text}')
+        print('Prompt for a blacklist')
 
 # Test command
-@bot.message_handler(commands=['Greet'])
+@bot.message_handler(commands=['Greet', 'greet'])
 def greet(message):
     bot.reply_to(message, 'Hey! How is it going?')
 

@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import mysql.connector
+from main import add_word_to_database, remove_word_from_database, get_blacklist_from_database
 
 app = Flask(__name__)
+CORS(app)
 
 # MySQL setup
 db_config = {
@@ -34,17 +37,22 @@ def index():
     blacklist = get_blacklist_from_database()
     return render_template('index.html', blacklist=blacklist)
 
-@app.route('/add_word', methods=['POST'])
+@app.route('/add_word', methods=['POST', 'GET'])
 def add_word():
-    word = request.form.get('word')
-    add_word_to_database(word)
-    return jsonify(success=True)
+    if request.method == 'POST':   
+        word = request.form.get('word')
+        print('Adding word:', word)
+        add_word_to_database(word)
+        return jsonify(success=True)
+    return jsonify(error='Invalid request method')
 
-@app.route('/remove_word', methods=['POST'])
+@app.route('/remove_word', methods=['POST', 'GET'])
 def remove_word():
-    word = request.form.get('word')
-    remove_word_from_database(word)
-    return jsonify(success=True)
+    if request.method == 'POST':
+        word = request.form.get('word')
+        remove_word_from_database(word)
+        return jsonify(success=True)
+    return jsonify(error='Invalid request method')
 
 if __name__ == '__main__':
     app.run(debug=True)

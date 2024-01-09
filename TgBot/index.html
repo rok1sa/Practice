@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!--link rel="stylesheet" href="style.css"-->
 </head>
 <body>
-    <h1>Hello! This soon is going to be an admin panel</h1>
+    <!--h1>Hello! This soon is going to be an admin panel</!--h1>
     <h2>Here is test button that will show you blacklist if you click on it</h2>
     <div id="blacklist"></div>
     <button id="loadBlacklist">Display bl</button>
@@ -23,34 +22,45 @@
     </form>
     
     <h2>Current Blacklist:</h2>
-    <ul id="blacklist"></ul>
+    <ul-- id="blacklist"></ul-->
 
     <h1>Blacklist</h1>
     <ul id="blacklist">
         {% for word in blacklist %}
-            <li>{{ word }} <button onclick="removeWord('{{ word }}')">Remove</button></li>
+        <li>{{ word }} <button onclick="removeWord('{{ word }}')">Remove</button></li>
         {% endfor %}
     </ul>
-    <input type="text" id="newWord" placeholder="New word">
-    <button onclick="addWord()">Add Word</button>
+
+    <form id="addWordForm">
+        <label for="newWord">Add Word to Blacklist:</label>
+        <input type="text" id="newWordInput" name="word" placeholder="New word" required>
+        <button type="submit">Add Word</button>
+    </form>
 
     <script>
-        function addWord(){
-            var word = document.getElementById('newWord').value;
+        document.getElementById('addWordForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            console.log('Form submitted');
+            
+            var word = document.getElementById('newWordInput').value;
+            console.log('Word: ', word);
+
             if (word){
                 fetch('/add_word', {
-                    method: 'POST',
-                    body: new URLSearchParams({'word': word}),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    method:'POST',
+                    body: new URLSearchParams({ 'word': word}),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then(response =>{
                     if (response.ok) {
-                        location.reload();
+                        location.reload(); //reloads the page
                     }
-                });
-            } /*tf this all means??*/
-        }
+                })
+            }
+
+        });
 
         function removeWord(word) {
+            console.log('Word', word);
             fetch('/remove_word', {
                 method: 'POST',
                 body: new URLSearchParams({ 'word': word }),
