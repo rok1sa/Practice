@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Word Form</title>
+</head>
+<body>
+    <h1>Add Word Form</h1>
+    <form id="addWordForm">
+        <label for="newWord">Add Word to Blacklist:</label>
+        <input type="text" id="newWordInput" name="word" placeholder="New word" required>
+        <button type="submit">Add Word</button>
+    </form>
+
+    <script>
+        document.getElementById("addWordForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var formData = new FormData();
+            var word = document.getElementById("newWordInput").value;
+            formData.append("word", word);
+
+            console.log("Form Data:", formData); // Log form data to console
+
+            fetch('/add_word', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log("Response Status:", response.status); // Log response status
+                return response.json();
+            })
+            .then(data => {
+                console.log("Response Data:", data); // Log response data
+                if (data.success) {
+                    console.log('Word added successfully!');
+                } else {
+                    console.log('Error adding word:', data.error);
+                }
+            })
+            .catch(error => {
+                console.log('Network error:', error); // Log network error
+            });
+        });
+    </script>
+</body>
+</html>

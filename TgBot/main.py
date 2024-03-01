@@ -6,6 +6,9 @@ from flask import Flask, render_template, request, jsonify
 import socket
 import threading
 import atexit
+from flask_app import app as flask_app
+from jinja2 import Template, Environment, FileSystemLoader
+
 
 
 load_dotenv()
@@ -160,3 +163,8 @@ def cleanup():
 
 # Register cleanup function
 atexit.register(cleanup)
+
+try: 
+    bot.polling(none_stop=True)
+except Exception as e:
+    print(f'Error: {e}')

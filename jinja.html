@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OPM : All Chapters</title>
+
+     <link rel="stylesheet" href="css/site.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <ul id="blacklistUL">
+        {% for name%}
+        <li>{{ name% }} <button onclick="removeWord('{{ word }}')">Remove</button></li>
+        {% endfor %}
+    </ul>
+
+<div class="container">
+<div class="row">
+    <div class="col text-center">
+        <h1>Total Chapters : {{ total }}</h1>
+    </div>
+</div>
+
+<div class="row">
+<div class="col text-center">
+<ul class="list-group">
+{% for chapter in chapters %}
+    <li class="list-group-item">
+     <a href="{{ chapter }}"> 
+      One Punch Man : Chapter {{ chapter.chapter }}
+     </a>
+    </li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
