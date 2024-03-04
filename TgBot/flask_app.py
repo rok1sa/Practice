@@ -1,13 +1,16 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_cors import CORS
 import mysql.connector
 import logging
 import sys
+import flask_login
+from flask_sqlalchemy import SQLAlchemy
+import psycopg2
 
 print(sys.path)
 
-
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
+#app = Flask(__name__, template_folder='templates')
 CORS(app, origins='*')
 
 # MySQL setup
@@ -151,6 +154,7 @@ def remove_item_from_database(item):
         db_connection.close()
         print(f'Successfully removed item: {item}')
     except mysql.connector.Error as err:
+        logging.error(f'Error removing word from database: {err}')
         print(f'Error removing item from the database: {err}')
         raise
 
@@ -159,10 +163,36 @@ def remove_item(item):
     remove_item_from_database(item)
     return jsonify(success=True)
 
+remove_item_from_database('test1');
+
 @app.route('/get_blacklist')
 def get_blacklist():
     blacklist = get_blacklist_from_database()
     return jsonify(blacklist=blacklist)
+
+@app.route('/')
+def index_render():
+    return render_template('index.html')
+
+# pdb config  and authorization
+
+PDB_HOST = 'dpg-cnija7ol5elc73fd86jg-a'
+PDB_NAME = 'admin_jl2l' # it's the db name, not user name
+PDB_USER = 'admin_jl2l_user'
+PDB_PASSWORD = 'QoJxbzEakr5pSeXtGVdATWixUGauBO2K'
+
+def connect_to_postgresql():
+    try:
+        connection = psycopg2.connect(
+            dbname=PDB_NAME,
+            user=PDB_USER,
+            password=PDB_PASSWORD,
+            host=PDB_HOST
+        )
+        print('Connected to the PostgreSQL.')
+    except psycopg2.error as e:
+        print('Connection to PostgreSQL failed.', e)
+    
 
 app.config['DEBUG'] = True
 

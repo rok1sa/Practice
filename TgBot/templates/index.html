@@ -51,13 +51,13 @@
 
     <script>
         function removeItem(item) {
-            fetch('/remove_item/' + encodeURIComponent(item), {
+            fetch(`/remove_item/${encodeURIComponent(item)}`, {
                 method: 'DELETE'
             })
                 .then(response => {
                     if (response.ok) {
                         console.log(`${item} removed successfully`);
-                        location.reload(); // Reload the page to reflect changes
+                        refreshContent(); // Refresh the content after successful removal
                     } else {
                         console.log(`Failed to remove: ${item}`);
                     }
@@ -65,8 +65,8 @@
                 .catch(error => {
                     console.log(`Error removing: ${item}: `, error);
                 });
-        }
-        
+        }        
+
         function refreshContent() {
             fetch('http://localhost:5000/get_blacklist')
                 .then(response => response.json())
@@ -240,9 +240,10 @@
             });
         });
 
-    </script>
+        //example - 
+        //fetch('/add_word', { method: 'POST', body: formData })
 
-    <script src="/TgBot/script.js"></script>
+    </script>
 
 </body>
 
